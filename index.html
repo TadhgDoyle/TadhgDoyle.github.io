@@ -150,18 +150,30 @@
                 left: 50%;
                 width: 50%;
                 right: auto;
-                padding-top: 10px; /* Reduced padding-top for landscape phone */
+                padding: 10px; /* Reduced overall padding for landscape phone */
+                justify-content: space-evenly; /* Evenly distribute content vertically */
             }
-            .content-text-block,
-            .history-year-text,
-            .history-detail-text,
-            .history-detail-small,
+            .content-text-block p,
+            .content-text-block ul,
+            .history-detail-text {
+                font-size: 0.7rem; /* Further reduced font size for better fit on landscape phones */
+                line-height: 1.1; /* Tighter line height */
+            }
+            .history-year-text {
+                font-size: 1.4rem; /* Adjusted for landscape phones */
+            }
+            .history-detail-small {
+                font-size: 0.6rem; /* Even smaller for very fine print */
+            }
             .highlight-text {
-                font-size: 0.8rem; /* Reduced font size for better fit on landscape phones */
+                font-size: 1.8rem; /* Adjusted for landscape phones */
             }
             .new-title-text {
-                font-size: 2rem; /* Adjusted for landscape phones */
-                margin-top: 5vh; /* Adjusted for landscape phones */
+                font-size: 1.8rem; /* Adjusted for landscape phones */
+                margin-top: 3vh; /* Adjusted for landscape phones */
+            }
+            .top-page-logo { /* Reduced logo size for landscape to save vertical space */
+                max-width: 60px; /* Smaller logo */
             }
         }
 
@@ -197,6 +209,20 @@
                 bottom: 0;
                 justify-content: space-between;
                 align-items: center;
+                padding-top: 10px; /* Reduced padding for portrait phone too */
+                padding-bottom: 10px;
+            }
+            /* Further reduce text size for portrait if needed */
+            .content-text-block p,
+            .content-text-block ul,
+            .history-detail-text,
+            .history-year-text,
+            .history-detail-small,
+            .highlight-text {
+                font-size: 0.8rem; /* Adjusted text size for portrait */
+            }
+            .new-title-text {
+                font-size: 2.2rem; /* Adjusted title size for portrait */
             }
         }
 
@@ -389,7 +415,7 @@
             <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/TadhgCover2.jpg?raw=true" alt="Tadhg Cover Image" class="full-page-image">
             <div class="image-gradient-overlay"></div>
             <div class="text-content-area">
-                <p class="new-title-text">TestTadhg<br>Doyle</p>
+                <p class="new-title-text">Test3Tadhg<br>Doyle</p>
                 <p class="mt-2 content-text-block profile-subtitle-text">Player Profile 2025</p>
                 <p class="text-muted small content-text-block">Optimized for landscape phone viewing. Swipe left to navigate.</p>
                 <a href="#" class="btn btn-swipe mt-3" onclick="navigatePage('next')">
