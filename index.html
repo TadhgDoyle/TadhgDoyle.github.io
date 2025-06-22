@@ -3,913 +3,846 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tadhg Doyle - Player Profile</title>
+    <title>TadhgFootballVersionJune</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Google Fonts - Roboto (for body and headers) and Anton (for Tadhg Doyle) -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght=300&family=Anton&display=swap" rel="stylesheet">
-
+    <!-- Google Fonts: Anton for headlines, Roboto for general text (including Light 300 weight) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Font Awesome for Trophy Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Base styles for body and html */
-        body, html {
-            height: 100%;
-            margin: 0;
-            overflow: hidden; /* Prevent global scroll to allow custom section scrolling */
+        /* Custom CSS */
+        body {
             font-family: 'Roboto', sans-serif;
-            background-color: #020502;
-        }
-
-        /* GLOBAL PARAGRAPH MARGIN OVERRIDE */
-        p {
-            margin: 5px 0; /* Sets 5px top/bottom margin, 0px left/right */
-        }
-
-        /* Global list reset */
-        ul {
             margin: 0;
-            padding: 0;
-            list-style-type: none; /* Remove default bullet points if needed */
+            overflow: hidden; /* Prevent body scroll, content will handle its own scroll if needed */
         }
 
-        li {
-            margin: 0;
-            padding: 0;
-        }
-
-
-        /* SPA Container for all sections */
-        .spa-container {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s ease-in-out; /* Smooth slide transition */
-            position: relative; /* Needed for absolute positioning of sections */
-            border-radius: 1rem;
-        }
-
-        /* Individual Page Sections */
-        .page-section {
-            flex-shrink: 0; /* Prevent sections from shrinking */
-            width: 100vw; /* Each section takes full viewport width */
-            height: 100vh; /* Each section takes full viewport height */
-            display: flex;
-            position: relative; /* For absolute positioning of inner elements */
-            /* Removed overflow: hidden; to allow text-content-area to scroll */
-            border-radius: 1rem;
-            background-color: #020502;
-        }
-
-        /* Shared styling for image and text areas across all pages */
-        .full-page-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* object-fit and object-position set in media queries for mobile */
-            z-index: 1;
-        }
-
-        /* Specific override for Page 9 image */
-        #page9 .full-page-image {
-            object-position: left;
-        }
-
-        /* Specific override for Page 10 image to show top left */
-        #page10 .full-page-image {
-            object-position: top left;
-        }
-
-        /* Specific override for Page 12 image to show top left */
-        #page12 .full-page-image {
-            object-position: top left;
-        }
-
-        /* Specific override for Page 13 image to show top left */
-        #page13 .full-page-image {
-            object-position: top left;
-        }
-        /* Specific override for Page 14 image to show top left */
-        #page14 .full-page-image {
-            object-position: top left;
-        }
-        /* Specific override for Page 15 image to show top left */
-        #page15 .full-page-image {
-            object-position: top left;
-        }
-        /* Specific override for Page 16 image to show top left */
-        #page16 .full-page-image {
-            object-position: top left;
-        }
-        /* Specific override for Page 17 image to show top left */
-        #page17 .full-page-image {
-            object-position: top left;
-        }
-        /* Specific override for Page 18 image to show top left */
-        #page18 .full-page-image {
-            object-position: top left;
-        }
-        /* Specific override for Page 19 image to show top left */
-        #page19 .full-page-image {
-            object-position: top left;
-        }
-        /* Specific override for Page 20 image to show top left */
-        #page20 .full-page-image {
-            object-position: top left;
-        }
-        /* Specific override for Page 21 image to show top left */
-        #page21 .full-page-image {
-            object-position: top left;
-        }
-
-
-        .image-gradient-overlay {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(2,5,2,0), rgba(2,5,2,1));
-            z-index: 2;
-        }
-
-        .text-content-area {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            color: white;
-            display: flex;
-            flex-direction: column; /* Ensure column layout */
-            justify-content: space-between; /* Default for larger screens */
-            align-items: center; /* Default for larger screens */
-            padding: 20px;
-            padding-top: 15px;
-            background-color: #020502;
-        }
-
-        /* Media query for landscape phone */
-        @media (min-width: 576px) and (orientation: landscape) {
-            .full-page-image {
-                left: 0;
-                width: 50%;
-                border-radius: 0.5rem;
-                object-fit: contain; /* Ensure image fits vertically without exceeding */
-                object-position: center center; /* Center image visually */
-            }
-            .image-gradient-overlay {
-                left: 0;
-                width: 50%;
-                background: linear-gradient(to right, rgba(2,5,2,0), rgba(2,5,2,1));
-            }
-            .text-content-area {
-                left: 50%;
-                width: 50%;
-                right: auto;
-                padding: 5px; /* Further reduced overall padding for landscape phone */
-                justify-content: flex-start; /* Stack content from the top */
-                align-items: center; /* Keep content centered horizontally */
-                overflow-y: auto; /* Enable vertical scrolling if content overflows */
-            }
-            .page-header-text,
-            .history-year-text,
-            .history-detail-text,
-            .history-detail-small,
-            .content-text-block p,
-            .content-text-block ul {
-                margin-top: 0; /* Ensure no top margin for these elements */
-                margin-bottom: 0.05rem; /* Very tight bottom spacing for text elements */
-                line-height: 1.1; /* Tighter line height for readability */
-            }
-            .content-text-block p,
-            .content-text-block ul,
-            .history-detail-text {
-                font-size: 0.65rem; /* Further reduced font size for very dense content */
-            }
-            .history-year-text {
-                font-size: 1.2rem; /* Adjusted for landscape phones */
-            }
-            .history-detail-small {
-                font-size: 0.55rem; /* Even smaller for very fine print */
-            }
-            .highlight-text {
-                font-size: 0.9rem; /* Adjusted for landscape phones (approx 50% of prev 1.8rem) */
-                margin-top: 0.05rem; /* Ensure minimal top margin */
-                margin-bottom: 0.05rem; /* Ensure minimal bottom margin */
-            }
-            .new-title-text {
-                font-size: 1.6rem; /* Adjusted for landscape phones */
-                margin-top: 2vh; /* Adjusted to move higher */
-            }
-            .top-page-logo { /* Reduced logo size for landscape to save vertical space */
-                max-width: 45px; /* Reduced further */
-                margin-bottom: 0.05rem; /* Very tight spacing */
-                margin-top: 0.05rem; /* Very tight spacing */
-            }
-            .ddsl-logo {
-                height: 0.8em; /* Reduced further */
-            }
-            /* Specific adjustments for tightly packed content blocks */
-            .content-text-block {
-                padding-top: 0.1rem; /* Reduced padding within content blocks */
-                padding-bottom: 0.1rem;
-            }
-        }
-
-        /* Media query for portrait phone */
-        @media (max-width: 575.98px) {
-            .full-page-image {
-                position: relative;
-                width: 100%;
-                height: 50%;
-                border-radius: 0;
-                left: auto;
-                object-fit: contain; /* Ensure image fits vertically without exceeding */
-                object-position: center center; /* Center image visually */
-            }
-            .image-gradient-overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 50%;
-                background: linear-gradient(to bottom, rgba(2,5,2,0), rgba(2,5,2,1));
-                border-radius: 0;
-            }
-            .text-content-area {
-                position: relative;
-                width: 100%;
-                height: 50%;
-                top: 50%;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                padding: 10px; /* Reduced padding for portrait phone */
-                justify-content: flex-start; /* Stack content from the top */
-                align-items: center; /* Keep content centered horizontally */
-                overflow-y: auto; /* Enable vertical scrolling if content overflows */
-            }
-            .page-header-text,
-            .history-year-text,
-            .history-detail-text,
-            .history-detail-small,
-            .content-text-block p,
-            .content-text-block ul {
-                margin-top: 0; /* Ensure no top margin for these elements */
-                margin-bottom: 0.1rem; /* Reduced margin bottom for compression */
-                line-height: 1.2; /* Tighter line height */
-            }
-            .content-text-block p,
-            .content-text-block ul,
-            .history-detail-text {
-                font-size: 0.75rem; /* Adjusted text size for portrait */
-            }
-            .history-year-text {
-                font-size: 2rem; /* Adjusted title size for portrait */
-            }
-            .history-detail-small {
-                font-size: 0.7rem;
-            }
-            .highlight-text {
-                font-size: 1.0rem; /* Adjusted for portrait phones (approx 50% of prev 2.4rem if that was the base) */
-                margin-top: 0.1rem; /* Ensure minimal top margin */
-                margin-bottom: 0.1rem; /* Ensure minimal bottom margin */
-            }
-            .new-title-text {
-                font-size: 2rem; /* Adjusted title size for portrait */
-                margin-top: 5vh; /* Adjusted for portrait phones */
-            }
-            .top-page-logo { /* Reduced logo size for portrait */
-                max-width: 50px; /* Reduced further */
-                margin-bottom: 0.1rem; /* Very tight spacing */
-                margin-top: 0.1rem; /* Very tight spacing */
-            }
-            .ddsl-logo {
-                height: 0.8em; /* Reduced further */
-            }
-            /* Specific adjustments for tightly packed content blocks */
-            .content-text-block {
-                padding-top: 0.2rem; /* Reduced padding within content blocks */
-                padding-bottom: 0.2rem;
-            }
-        }
-
-        /* Specific styling for the initial page title (Page 1) */
-        .new-title-text {
+        h1, h2, h3, h4, h5, h6 {
             font-family: 'Anton', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            font-style: normal;
-            text-transform: none;
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-            color: white; /* Changed to white */
-            text-align: center;
-            width: 100%;
-            margin-top: 10vh; /* Adjusted to move further down */
         }
 
-        /* Styling for Player Profile 2025 text */
-        .profile-subtitle-text {
-            font-weight: bold; /* Made bold */
-            color: #B0B0B0; /* Changed to grey */
-            text-align: center;
-            width: 100%;
+        /* General rule to remove rounded corners from all divs by default */
+        div {
+            border-radius: 0 !important; /* !important to override Bootstrap defaults */
         }
 
-        /* Consistent header style for all subsequent pages */
-        .page-header-text {
-            font-family: 'Roboto', sans-serif;
-            font-size: 0.63rem;
-            font-weight: 700;
-            font-style: italic;
-            color: #B0B0B0;
-            margin-bottom: 0.25rem;
-            text-align: center;
-            width: 100%;
-        }
-
-        /* Removed existing button styles as they are replaced */
-        /* .btn-page, .btn-swipe, .btn-icon-only, .button-group are removed */
-
-        /* Specific styling for text content blocks (paragraphs and lists) */
-        .content-text-block {
-            text-align: left;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            max-width: 90%;
-            margin: 0 auto;
-            flex-grow: 1;
+        /* App Container - Full viewport height */
+        .app-container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .content-text-block p, .content-text-block ul {
-            width: 100%;
-            text-align: left;
-            margin-bottom: 0.5rem;
-        }
-        .content-text-block ul {
-            list-style-type: disc;
-            padding-left: 20px;
-            margin-top: 0.5rem;
-        }
-        .content-text-block li {
-                margin-bottom: 0.5rem;
+            height: 100vh; /* Full viewport height */
+            background-color: #000; /* Default background for the whole app */
         }
 
-        /* Logo styling */
-        .logo-img {
-            max-width: 120px;
-            height: auto;
-            margin-bottom: 1rem;
-            border-radius: 0.5rem;
-        }
-        .top-page-logo {
-            max-width: 75px;
-            height: auto;
-            margin-bottom: 0.1rem;
-            margin-top: 0.5rem;
-        }
-        .history-year-text {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 300;
-            color: white;
-            font-size: 1.8rem;
-            margin-top: 0.1rem;
-            margin-bottom: 0.1rem;
-            text-align: center;
-            width: 100%;
-        }
-        .history-detail-text {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 300;
-            color: white;
-            font-size: 0.9rem;
-            line-height: 1.2;
-            text-align: center;
-            width: 100%;
-            margin-top: 0;
-            margin-bottom: 0.1rem;
-        }
-        .history-detail-small {
-            font-size: 0.75rem;
-            opacity: 0.8;
-            text-align: center;
-            width: 100%;
-            margin-top: 0;
-        }
-        .ddsl-logo {
-            height: 1.2em;
-            width: auto;
-            vertical-align: middle;
-            margin-right: 0.2rem;
-        }
-        .highlight-text {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 300;
-            color: #505050;
-            font-size: 1.2rem; /* Reduced by 50% from 2.4rem */
-            text-align: center;
-            width: 100%;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* New global navigation styles */
-        .global-nav-buttons {
+        /* Fixed Top Menu */
+        .top-menu {
             position: fixed;
-            top: 50%;
+            top: 0;
             left: 0;
-            right: 0;
-            transform: translateY(-50%);
+            width: 100%;
+            height: 60px; /* Explicit height for navbar */
+            background-color: rgb(0, 0, 0); /* Entirely black */
+            color: #fff;
+            padding: 0.5rem 1rem;
+            z-index: 1000; /* Ensure it's always on top, below icons */
             display: flex;
             justify-content: space-between;
-            padding: 0 1rem;
-            z-index: 10;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            border-radius: 0.5rem !important; /* Explicitly keep rounded corners for the menu */
         }
 
-        .nav-arrow {
+        /* Custom dropdown styling */
+        .top-menu .dropdown-menu {
+            background-color: rgba(0, 0, 0, 0.8);
+            border: none;
+            border-radius: 0.5rem !important;
+            padding: 0.5rem 0;
+            min-width: 12rem;
+            max-height: calc(100vh - 70px); /* Set max height to allow scrolling */
+            overflow-y: auto; /* Enable vertical scrollbar */
+        }
+
+        /* Custom Scrollbar for dropdown menu */
+        .top-menu .dropdown-menu::-webkit-scrollbar {
+            width: 8px; /* Narrow scrollbar */
+        }
+
+        .top-menu .dropdown-menu::-webkit-scrollbar-track {
+            background: transparent; /* Flat style */
+        }
+
+        .top-menu .dropdown-menu::-webkit-scrollbar-thumb {
+            background-color: #ff0000; /* Red color */
+            border-radius: 4px; /* Rounded corners */
+        }
+
+        .top-menu .dropdown-menu::-webkit-scrollbar-thumb:hover {
+            background-color: #cc0000; /* Slightly darker red on hover */
+        }
+
+
+        .top-menu .dropdown-item {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            text-decoration: none; /* Ensure no underline */
+        }
+
+        .top-menu .dropdown-item:hover,
+        .top-menu .dropdown-item:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        /* Subheading indentation and style */
+        .top-menu .dropdown-item.subheading {
+            padding-left: 2.5rem !important; /* Indent */
+            font-weight: 300 !important; /* Roboto Light */
+            color: #fff !important; /* White, no transparency */
+        }
+
+        /* New: Deeper subheading indentation */
+        .top-menu .dropdown-item.sub-subheading {
+            padding-left: 3.5rem !important; /* Further indent */
+            font-weight: 300 !important; /* Roboto Light */
+            color: #fff !important; /* White, no transparency */
+        }
+
+        /* New: Styling for descriptive menu headers */
+        .top-menu .menu-descriptive-header {
+            color: rgba(255, 255, 255, 0.8) !important; /* Match dropdown-item color */
+            padding: 0.75rem 1.5rem !important; /* Match dropdown-item padding */
+            font-weight: bold !important; /* Match dropdown-item font-weight */
+            cursor: default !important; /* Not clickable */
+            pointer-events: none !important; /* Prevent click events */
+            background-color: transparent !important; /* Ensure no background on hover/focus */
+            text-decoration: none !important; /* Explicitly remove underline */
+            font-size: 1rem !important; /* Ensure standard size */
+            display: block !important; /* Make it behave like a block-level link for full padding */
+            line-height: 1.5 !important; /* Match line height of other items */
+        }
+
+
+        .top-menu .dropdown-toggle {
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0;
             background: none;
             border: none;
-            color: white;
-            font-size: 2.5rem;
-            cursor: pointer;
-            opacity: 0.5; /* Initial transparency */
-            transition: opacity 0.3s ease-in-out, color 0.3s ease-in-out;
-            text-decoration: none; /* Remove underline for anchor tags */
-            display: flex; /* To center icon if text were present */
-            align-items: center;
-            justify-content: center;
         }
 
-        .nav-arrow:hover {
-            opacity: 1; /* Fully white on hover */
-            color: white; /* Ensure color stays white on hover */
-        }
-
-        /* Hide navigation arrows on the first and last page respectively */
-        .nav-arrow.hidden {
-            display: none;
-        }
-
-        /* Adjustments for Page 1's initial swipe button */
-        #page1 .btn-swipe {
-            background-color: #600000;
-            color: white;
-            border: 1px solid white;
-            padding: 0.5rem 1.5rem;
-            font-size: 0.9rem;
-            transition: background-color 0.3s ease;
+        /* Grouping for left and right menu items */
+        .menu-left-items, .menu-right-items {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 0.5rem;
-            border-radius: 0.5rem;
         }
-        #page1 .btn-swipe:hover {
-            background-color: #7B0000;
-            color: white;
-            border-color: white;
+
+        /* Dynamic section header on the right */
+        .nav-section-header {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            color: #fff;
+            font-size: calc(1.1rem * 0.75);
+            white-space: nowrap;
+        }
+
+        /* Main content area below the menu */
+        .main-content {
+            flex-grow: 1; /* Takes remaining vertical space */
+            position: relative; /* For positioning gradient and navigation */
+            margin-top: 60px; /* Pushed down by the fixed top menu's height */
+            height: calc(100vh - 60px); /* Fills remaining viewport height */
+            overflow: hidden; /* Crucial to hide parts of slides outside view */
+        }
+
+        /* Slides Wrapper - holds all individual slides and handles the transition */
+        .slides-wrapper {
+            position: absolute;
+            top: 0; /* Relative to main-content's top */
+            left: 0;
+            width: 100%;
+            height: 100%; /* Fill the entire height of main-content */
+            display: flex;
+            flex-direction: column; /* Stack slides vertically */
+            transition: transform 0.5s ease-in-out; /* Smooth transition for vertical movement */
+        }
+
+        /* Individual Slide - each slide takes full height of the slides-wrapper, but can scroll */
+        .slide {
+            flex-shrink: 0; /* Prevent slides from shrinking */
+            width: 100%;
+            height: 100%; /* Each slide takes full height */
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; /* Allow entire slide to scroll if content overflows */
+        }
+
+        /* Custom Scrollbar Styling for slides (Webkit browsers) */
+        .slide::-webkit-scrollbar {
+            width: 8px; /* Narrow scrollbar */
+        }
+
+        .slide::-webkit-scrollbar-track {
+            background: transparent; /* Flat style */
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background-color: #ff0000; /* Red color */
+            border-radius: 4px; /* Rounded corners (half of width for full pill shape) */
+        }
+
+        .slide::-webkit-scrollbar-thumb:hover {
+            background-color: #cc0000; /* Slightly darker red on hover */
+        }
+
+
+        /* BASE divs: UNDERLAY and PHOTO within each slide */
+        .base-div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Aligns content to the top */
+            position: relative; /* For content within */
+        }
+
+        .underlay-div {
+            background-color: #000; /* Opaque black */
+            color: #fff;
+            flex-shrink: 0; /* Prevent shrinking below content size */
+            height: auto; /* Allow height to be determined by content */
+            min-height: 20vh; /* Minimum height for underlay */
+        }
+
+        .photo-div {
+            background-color: #000; /* Black background */
+            flex-shrink: 0; /* Allow image to dictate its height */
+            height: auto; /* Allow height to be determined by image */
+            min-height: 20vh; /* Ensure photo div has a minimum height */
+            position: relative; /* Needed for absolute positioning of image and overlay */
+        }
+
+        .photo-div img {
+            width: 100%; /* Full width of its container */
+            height: auto; /* Maintain aspect ratio */
+            display: block;
+            object-fit: contain; /* Ensure full image is visible without cropping */
+            position: relative; /* Position relative to photo-div content flow */
+            z-index: 1; /* Place image behind overlay */
+        }
+
+        /* New overlay divs */
+        .top-overlay-div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; /* Will match the height of its parent (.underlay-div) */
+            background: transparent; /* Invisible */
+            pointer-events: none; /* Allows clicks to pass through */
+            z-index: 10; /* Above content */
+        }
+
+        .bottom-overlay-div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; /* Will match the height of its parent (.photo-div) */
+            background: linear-gradient(to bottom,
+                        rgba(0,0,0,1) 0%,      /* Black at top of photo-div */
+                        rgba(0,0,0,0) 33%,     /* Transparent 1/3 into photo-div */
+                        rgba(0,0,0,0) 100%);   /* Stays transparent */
+            pointer-events: none; /* Allows clicks to pass through */
+            z-index: 10; /* Above image */
+        }
+
+        /* Navigation Icons */
+        .nav-icon {
+            position: fixed; /* Fixed position relative to viewport */
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 1001; /* Higher z-index to be above navbar */
+            transition: color 0.3s ease;
+        }
+
+        .nav-icon:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-top {
+            top: 80px; /* Adjusted for space below navbar */
+        }
+
+        .nav-bottom {
+            bottom: 10px; /* Near the bottom */
+        }
+
+        /* Content for underlay - example */
+        .underlay-content, .photo-content {
+            padding: 3.5rem 1.5rem 1.5rem 1.5rem; /* Increased top padding to push content down */
+            text-align: center; /* Center align all content within this div */
+            z-index: 2; /* Ensure content is above image (if photo-content) */
+            position: relative; /* Needed for z-index to work against absolute image/overlays */
+            overflow-y: hidden; /* Ensure no internal scrollbar */
+            height: auto; /* Allow content to define height */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Aligns content to the top */
+            align-items: center; /* Keep horizontal centering */
+        }
+        /* Style for all underlay-content h1 tags */
+        .underlay-content h1 {
+            font-family: 'Roboto', sans-serif; /* Applied Roboto Light */
+            font-weight: 300; /* Roboto Light */
+            color: rgba(255, 0, 0, 0.5); /* Red with 50% transparency */
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        .underlay-content p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 0 1rem;
+            text-align: center; /* Ensure text within paragraphs is also centered */
+            width: 100%; /* Ensure it takes full width for centering */
+            max-width: 600px; /* Optional: control max width for readability on larger screens */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        /* Styling for the specific "Tadhg's main attributes are his:" paragraph */
+        .attributes-intro-text {
+            font-weight: bold; /* Bold */
+            font-style: italic; /* Italic */
+            color: rgba(255, 255, 255, 0.75); /* White with 75% transparency */
+            margin-bottom: 0.5rem; /* Adjust as needed for space below */
+        }
+        /* Styling for unordered lists within underlay-content for bullet points */
+        .underlay-content ul {
+            list-style-type: disc; /* Default bullet point */
+            color: #fff; /* White color for bullets and text */
+            text-align: left; /* Align list to the left */
+            width: 100%; /* Ensure it takes full width for left alignment */
+            max-width: 600px; /* Optional: control max width for readability */
+            padding-left: 2rem; /* Indent list items for bullets */
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        .underlay-content ul li {
+            margin-bottom: 0.5rem; /* Space between list items */
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Specific style for Season 2011 - 2022 heading (typo in comment, should be 2021-2022) */
+        #slide-season-2021-2022 .underlay-content h1 {
+            font-size: 1.25rem; /* 50% of 2.5rem */
+            color: #fff; /* White */
+        }
+
+        /* Styling for the St Kevins Boys Logo */
+        .top-page-logo {
+            width: 37.5% !important; /* Corrected size based on history: 50% * 0.75 */
+            height: auto;
+            display: block; /* Ensure it respects width/margin for centering */
+            margin: 1rem auto; /* Center the logo and add vertical space */
+        }
+
+        /* Styling for reusable club name text */
+        .club-name-text {
+            font-size: 2rem !important; /* Twice the size of body text (1rem * 2) */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300 !important; /* Roboto Light with !important */
+            color: rgba(255, 255, 255, 0.75) !important; /* White with 75% transparency with !important */
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            text-align: center !important; /* Explicitly center this specific text */
+        }
+
+        /* Styling for Awards and Recognitions heading text transparency */
+        .awards-recognitions-heading {
+            color: rgba(255, 255, 255, 0.75) !important; /* White with 75% transparency */
+        }
+
+        /* Styling for the actual award lines (fully white, no transparency) */
+        .awards-item-lines-solid-white {
+            color: #fff !important; /* Solid white with !important to ensure override */
+            text-align: center !important; /* Center the text */
+            font-size: 1rem; /* Ensure body text size */
+            line-height: 1.5;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 0 1rem;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        /* NEW: Styling for logos that are half the size of .top-page-logo */
+        .logo-half-kevins { /* Renamed for clarity and consistency */
+            width: 18.75% !important; /* Half of top-page-logo width: 37.5% / 2 */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* For correct flex behavior */
+        }
+
+        /* Flex container for logos to place them side by side and centered */
+        .logos-container {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Align vertically */
+            gap: 1rem; /* Space between logos */
+            margin-top: 1rem; /* Space below the awards */
+            margin-bottom: 1rem; /* Space above the next paragraph */
+            flex-wrap: wrap; /* Allow logos to wrap on smaller screens */
         }
     </style>
 </head>
 <body>
-    <div class="spa-container" id="spaContainer">
-
-        <!-- Page 1 (index.html content) -->
-        <section id="page1" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/TadhgCover2.jpg?raw=true" alt="Tadhg Cover Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="new-title-text">Tadhg<br>Doyle</p>
-                <p class="mt-2 content-text-block profile-subtitle-text">Player Profile 2025</p>
-                <p class="text-muted small content-text-block">Optimized for landscape phone viewing. Swipe left to navigate.</p>
-                <a href="#" class="btn btn-swipe mt-3" onclick="navigatePage('next')">
-                    Swipe <i class="fas fa-arrow-left"></i>
-                </a>
-            </div>
-        </section>
-
-        <!-- Page 2 (Background) -->
-        <section id="page2" class="page-section">
-            <img src="https://raw.githubusercontent.com/TadhgDoyle/TadhgDoyleFootball/refs/heads/main/TadhgYoung.png" alt="Player Profile Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle • Player Profile 2025 • Background</p>
-                <div class="content-text-block">
-                    <p>Born on 28th February 2012 in Portiuncula University Hospital, Ballinasloe, Ireland. Tadhg has been raised in 'Carrownure Lower', a townland near the small village of Lecarrow in South Roscommon. Obsessed with football since he could walk, Tadhg's stated aim in life, since he could express himself, is to become a professional footballer. This remains his vision for himself and his ultimate goal. During his early years Tadhg played with the local 'St. John's Athletic' team. Following the relaxation of covid restrictions, it was decided to give Tadhg the opportunity to play his football in Dublin within the DDSL league.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Page 3 (Overview/Skills) -->
-        <section id="page3" class="page-section">
-            <img src="https://raw.githubusercontent.com/TadhgDoyle/TadhgDoyleFootball/refs/heads/main/TadhgOnThe%20Ball.jpg" alt="Tadhg On The Ball Small Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle • Player Profile 2025 • Overview</p>
-                <div class="content-text-block">
-                    <p>Tadhg is an incredibly skilled, gifted, aware, technical midfielder. He moulds himself in the impression of a combination of players such as Scholes, Iniesta, Verrati and Modric. Genuinely, and naturally two footed (constant work on what might be considered his weaker side, has often led to confusion as to which foot he actually plays off). His engine is well attested, measured and acknowledged, making him a true box to box player. Tadhg's preferred role is1 that of a '6', effectively 'quarterbacking' the game, ensuring efficient transition between the thirds. An extremely versatile player, Tadhg can perform and excel in any midfield role, play wing back on either side, play 8,10 or false 9.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Page 4 (Qualities) -->
-        <section id="page4" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/Tadhg2025.jpg?raw=true" alt="Tadhg 2025 Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle • Player Profile 2025 • Attributes</p>
-                <div class="content-text-block">
-                    <p>Tadhg's main attributes are his:</p>
-                    <ul>
-                        <li>Utter and unquestionable commitment and self belief. To every training session, match, and opportunity to better himself. Winning is everything, losing an unwanted but sometimes necessary opportunity to learn.</li>
-                        <li>Born to lead. Tadhg likes to lead by example and be vocal in a positive manner. Very evident in the choice of Tadhg with 'players player' recognitions throughout various seasons, clubs and tournaments.</li>
+    <div class="app-container">
+        <!-- Top Menu -->
+        <nav class="top-menu">
+            <div class="menu-left-items">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="material-icons">menu</span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="sectionDropdownMenu">
+                        <!-- Dropdown items will be populated by JavaScript -->
                     </ul>
                 </div>
             </div>
-        </section>
+            <div class="menu-right-items">
+                <span class="nav-section-header" id="currentSectionName"></span>
+                <div style="width: 2rem; height: 1px;"></div>
+            </div>
+        </nav>
 
-        <!-- Page 5 (New Attributes) -->
-        <section id="page5" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/TadhgCaptainvsJoeys.jpg?raw=true" alt="Tadhg Captain vs Joeys Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle • Player Profile 2025 • Attributes</p>
-                <div class="content-text-block">
-                    <ul>
-                        <li>Tadhg's technical skills are perhaps unmatched by any other '2012' player in the DDSL league. A truly gifted 'natural' footballer.</li>
-                        <li>Not the biggest player on the pitch, Tadhg uses his speed, agility, endurance, tactical nous, his physical and mental toughness to best his opponents. Brave and committed in the tackle.</li>
-                        <li>Football is his passion. He is driven to push his limits, learn and apply.</li>
-                    </ul>
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="slides-wrapper" id="slidesWrapper">
+                <!-- Slide 1: Introduction -->
+                <div class="slide" id="slide-introduction">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Tadhg Doyle<br>Player Profile<br>2025</h1>
+                            <p></p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/TadhgCover2.jpg?raw=true" alt="Tadhg Doyle Cover Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Background -->
+                <div class="slide" id="slide-background">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Background</h1>
+                            <p>Born on 28th February 2012 in Portiuncula University Hospital, Ballinasloe, Ireland. Tadhg has been raised in 'Carrownure Lower', a townland near the small village of Lecarrow in South Roscommon. Obsessed with football since he could walk, Tadhg's stated aim in life, since he could express himself, is to to become a professional footballer. This remains his vision for himself and his ultimate goal. During his early years Tadhg played with the local 'St. John's Athletic' team. Following the relaxation of covid restrictions, it was decided to give Tadhg the opportunity to play his football in Dublin within the DDSL league.</p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/TadhgYoung.png?raw=true" alt="Tadhg Young Football Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Overview + Attributes (This slide is the descriptive header now) -->
+                <div class="slide" id="slide-overview-attributes-header">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Overview + Attributes</h1>
+                            <p>Select a sub-section from the menu.</p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://placehold.co/720x1280/000000/FFFFFF?text=Overview+and+Attributes" alt="Overview and Attributes placeholder image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+
+                <!-- Slide 4: Overview -->
+                <div class="slide" id="slide-overview">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Overview</h1>
+                            <p>Tadhg is an incredibly skilled, aware, technical midfielder. Somewhat in the vein of players such as Scholes, Iniesta, Verrati and Modric. Genuinely and naturally two footed. His engine is well attested, measured and acknowledged, making him a true box to box player. Tadhg's preferred role is that of a '6', securing the central areas of the pitch while ensuring efficient transition between the thirds. Extremely versatile , Tadhg can perform and excel in any midfield role, play wing back on either side, or even play a false 9 role.</p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/TadhgOnThe%20Ball.jpg?raw=true" alt="Tadhg On The Ball Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 5: Attributes -->
+                <div class="slide" id="slide-attributes">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Attributes</h1>
+                            <p class="attributes-intro-text">Tadhg's main attributes are his:</p>
+                            <ul>
+                                <li>Unquestionable commitment and self belief. Applied to every training session, match, and opportunity to better himself. Driven to win, losing an unwanted but sometimes necessary opportunity to learn.</li>
+                                <li>Tadhg likes to lead by example and be vocal in a positive manner. A player's player.</li>
+                                <li>Tadhg's technical skills are certainly the equal of any other '2012' player in the DDSL league. A gifted 'natural' footballer.</li>
+                                <li>Never the biggest player on the pitch (nor the smallest), Tadhg uses his speed, balance, agility, endurance, tactical nous, his physical and mental toughness to best his opponents. Brave and committed in the tackle.</li>
+                                <li>Football is his passion. He is driven to push his limits, to learn, apply and succeed.</li>
+                            </ul>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/TadhgCaptainvsJoeys.jpg?raw=true" alt="Tadhg Captain vs Joeys Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 6: History (This slide is the descriptive header now) -->
+                <div class="slide" id="slide-history-header">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>History</h1>
+                            <p>Select a season from the menu.</p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://placehold.co/720x1280/4D4D4D/B0B0B0?text=History+Header" alt="History Header Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 7: Season 2021 - 2022 -->
+                <div class="slide" id="slide-season-2021-2022">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Season 2021 - 2022</h1>
+                            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
+                            <p class="club-name-text">St. Kevins Boys</p>
+                            <p class="centered-paragraph-text">League : DDSL U10.1 Sat</p>
+                            <p class="centered-paragraph-text">(Non Competitive - 7aside)</p>
+                            <p class="centered-paragraph-text awards-recognitions-heading" style="margin-top: 1rem;">Awards and Recognitions</p>
+                            <p class="centered-paragraph-text awards-item-lines-solid-white"><i class="fas fa-trophy"></i> Belfast Youth Cup (Trophy Section) Winners<br><i class="fas fa-trophy"></i> Kells Blackwater Cup Winners</p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2122/TadhgOnTheBallSmall.jpg?raw=true" alt="Tadhg On The Ball 2021-2022 Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Season Highlights (Sub-subheading of 2021 - 2022) -->
+                <div class="slide" id="slide-season-2021-2022-highlights">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Season Highlights</h1>
+                            <p>Belfast Youth Cup trophy section winners 2021</p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2122/TadhgBelfastCup.jpg?raw=true" alt="Tadhg Belfast Cup Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 8: Season 2022 - 2023 -->
+                <div class="slide" id="slide-season-2022-2023">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Season 2022 - 2023</h1>
+                            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
+                            <p class="club-name-text">St. Kevins</p>
+                            <p class="centered-paragraph-text">League: DDSL U11.1 Sat + DDSL U12.1 Sun</p>
+                            <p class="centered-paragraph-text">7aside + 9aside</p>
+                            <p class="centered-paragraph-text awards-recognitions-heading" style="margin-top: 1rem;">Awards and Recognitions</p>
+                            <p class="centered-paragraph-text awards-item-lines-solid-white"><i class="fas fa-trophy"></i> Belfast Youth Cup (Trophy Section) Winners<br><i class="fas fa-trophy"></i> Kells Blackwater Cup Winners<br><i class="fas fa-award"></i> Award</p>
+                            <div class="logos-container">
+                                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/Craigavon%20Cup%20logo2.png?raw=true" alt="Craigavon Cup Logo" class="logo-half-kevins">
+                                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/ddsl-logo.png?raw=true" alt="DDSL Logo" class="logo-half-kevins">
+                            </div>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2223/TadhgCaptain.jpg?raw=true" alt="Tadhg Captain 2022-2023 Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- NEW Slide for Season 2022 - 2030 Highlights -->
+                <div class="slide" id="slide-season-2022-2023-highlights">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Season Highlights</h1>
+                            <p>Content for 2022 - 2023 Season Highlights</p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://placehold.co/720x1280/6F6F6F/FFFFFF?text=2022-2023+Highlights" alt="Season 2022-2023 Highlights Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 9: Season 2023 - 2040 -->
+                <div class="slide" id="slide-season-2023-2024">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Season 2023 - 2040</h1>
+                            <p></p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://placehold.co/720x1280/7A7A7A/FFFFFF?text=Season+2023-2040" alt="Season 2023-2040 Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 10: Season 2040 - 2050 -->
+                <div class="slide" id="slide-season-2040-2050">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Season 2040 - 2050</h1>
+                            <p></p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://placehold.co/720x1280/8A8A8A/FFFFFF?text=Season+2040-2050" alt="Season+2040-2050+Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 11: In Summary -->
+                <div class="slide" id="slide-in-summary">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>In Summary</h1>
+                            <p></p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://placehold.co/720x1280/808080/FFFFFF?text=In+Summary" alt="In Summary Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 12: The Future -->
+                <div class="slide" id="slide-the-future">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>The Future</h1>
+                            <p></p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://placehold.co/720x1280/999999/FFFFFF?text=The+Future" alt="The Future Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 13: Contact Details -->
+                <div class="slide" id="slide-contact-details">
+                    <div class="base-div underlay-div">
+                        <div class="underlay-content">
+                            <h1>Contact Details</h1>
+                            <p></p>
+                        </div>
+                        <div class="top-overlay-div"></div>
+                    </div>
+                    <div class="base-div photo-div">
+                        <img src="https://placehold.co/720x1280/B0B0B0/FFFFFF?text=Contact+Details" alt="Contact Details Image">
+                        <div class="bottom-overlay-div"></div>
+                    </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Page 6 (History) -->
-        <section id="page6" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2122/TadhgOnTheBallSmall.jpg?raw=true" alt="Tadhg On The Ball Small Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2021 - 2022</p>
-                <p class="history-detail-text">League : DDSL U10.1 Sat</p>
-                <p class="history-detail-text history-detail-small">(Non Competitive - 7aside)</p>
-                <p class="history-detail-small">Awards and Recognitions</p>
-                <p class="history-detail-text"><i class="fas fa-trophy"></i> Belfast Cup (Trophy Section) Winners<br><i class="fas fa-trophy"></i> Kells Blackwater Cup Winners</p>
-            </div>
-        </section>
-
-        <!-- Page 7 (History - Modified) -->
-        <section id="page7" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2122/TadhgBelfastCup.jpg?raw=true" alt="Tadhg On The Ball Small Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2021 - 2022</p>
-                <p class="highlight-text">HIGHLIGHT</p>
-                <p class="history-detail-text"><i class="fas fa-trophy"></i> Belfast Cup (Trophy Section) Winners</p>
-            </div>
-        </section>
-
-        <!-- Page 8 (New History Section - Modified) -->
-        <section id="page8" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2223/TadhgCaptain.jpg?raw=true" alt="Tadhg Captain Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2022 - 2023</p>
-                <p class="history-detail-text">League : DDSL U11.1 Sat</p>
-                <p class="history-detail-text">DDSL U12.1 Sun</p>
-                <p class="history-detail-small">(7 aside + 9 aside)</p>
-                <p class="history-detail-small">Awards and Recognitions</p>
-                <p class="history-detail-text">
-                    <i class="fas fa-trophy"></i> Craigavon Cup Winners<br>
-                    <i class="fas fa-trophy"></i> DDSL U11 League Cup Winners<br>
-                    <i class="fas fa-trophy"></i> DDSL U12.1 Sun League Winners<br>
-                    <i class="fas fa-trophy"></i> DDSL U12 Sun League Cup Runners Up<br>
-                    <i class="fas fa-award"></i> Team Captain<br>
-                    <i class="fas fa-award"></i> Players POTY
-                </p>
-            </div>
-        </section>
-
-        <!-- Page 9 (New History Section - Duplicated from Page 7, Modified) -->
-        <section id="page9" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2223/cup.jpg?raw=true" alt="Tadhg On The Ball Small Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2022 - 2023</p>
-                <p class="highlight-text">HIGHLIGHT</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/ddsl-logo.png?raw=true" alt="DDSL Logo" class="top-page-logo">
-                <p class="history-detail-text"><i class="fas fa-trophy"></i> Captained St. Kevin's to a League and Cup double.</p>
-            </div>
-        </section>
-
-        <!-- Page 10 (New History Section - Duplicated from Page 9) -->
-        <section id="page10" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2223/IMG_20230615_194030.jpg?raw=true" alt="Tadhg On The Ball Small Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2022 - 2023</p>
-                <p class="highlight-text">HIGHLIGHT</p>
-                <p class="history-detail-text"><i class="fas fa-award"></i> Awarded Player's Player of the Year</p>
-            </div>
-        </section>
-
-        <!-- Page 11 (New History Section - Modified) -->
-        <section id="page11" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2324/OnTheBall23.jpg?raw=true" alt="Tadhg On The Ball Small Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2023 - 2024</p>
-                <p class="history-detail-text">League : DDSL U12 Premier Sat</p>
-                <p class="history-detail-small">(9 aside)</p>
-                <p class="history-detail-small">Awards and Recognitions</p>
-                <p class="history-detail-text">
-                    <i class="fas fa-trophy"></i> DDSL U12 League Cup Winners<br>
-                    <i class="fas fa-trophy"></i> SFAI National Trophy Winners<br>
-                    <i class="fas fa-award"></i> MOTM DDSL Cup Final<br>
-                    <i class="fas fa-award"></i> Scores winner vs Manchester Utd
-                </p>
-            </div>
-        </section>
-
-        <!-- Page 12 (New History Section - Duplicated from Page 9) -->
-        <section id="page12" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2324/PXL_20240512_115142455.jpg?raw=true" alt="Tadhg On The Ball Small Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2023 - 2024</p>
-                <p class="highlight-text">HIGHLIGHT</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/cropped-SFAI-PNG-2-300x300.png?raw=true" alt="SFAI Logo" class="top-page-logo">
-                <p class="history-detail-text"><i class="fas fa-trophy"></i> SFAI National Trophy Winners</p>
-            </div>
-        </section>
-
-        <!-- Page 13 (New History Section - Duplicated from Page 12) -->
-        <section id="page13" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2324/PXL_20240525_111650111.MP.jpg?raw=true" alt="New Image for Page 13" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2023 - 2024</p>
-                <p class="highlight-text">HIGHLIGHT</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/ddsl-logo.png?raw=true" alt="DDSL Logo" class="top-page-logo">
-                <p class="history-detail-text"><i class="fas fa-award"></i> MOTM for the second year running in the DDSL Cup Final</p>
-            </div>
-        </section>
-
-        <!-- Page 14 (New History Section - Duplicated from Page 13) -->
-        <section id="page14" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2324/ManUtd.jpg?raw=true" alt="New Image for Page 14" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/new_crest_24.png?raw=true" alt="St Kevins Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2023 - 2024</p>
-                <p class="highlight-text">HIGHLIGHT</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2324/manutd.png?raw=true" alt="Man Utd Logo" class="top-page-logo">
-                <p class="history-detail-text"><i class="fas fa-award"></i> Scores winning goal in a 2-1 victory over Manchester Utd at the Carrington Training Ground</p>
-            </div>
-        </section>
-
-        <!-- Page 15 (New History Section - Duplicated from Page 11) -->
-        <section id="page15" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2425/FB_IMG_1745217751798.jpg?raw=true" alt="Cherry Orchard Boys Logo" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/CherryOrchard.png?raw=true" alt="Cherry Orchard Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2024 - 2025</p>
-                <p class="history-detail-text">League : DDSL U13 Premier Sat</p>
-                <p class="history-detail-small">(11 aside)</p>
-                <p class="history-detail-small">Awards and Recognitions</p>
-                <p class="history-detail-text">
-                    <i class="fas fa-trophy"></i> DDSL U13 League Winners<br>
-                    <i class="fas fa-trophy"></i> SFAI National Cup Winners<br>
-                    <i class="fas fa-award"></i> Player's Player of the Tournament (Baronie Cup - Netherlands)
-                </p>
-            </div>
-        </section>
-
-        <!-- Page 16 (New History Section - Duplicated from Page 12) -->
-        <section id="page16" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2425/TadhgAllIreland.jpg?raw=true" alt="Tadhg On The Ball Small Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/CherryOrchard.png?raw=true" alt="Cherry Orchard Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2024 - 2025</p>
-                <p class="highlight-text">HIGHLIGHT</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/cropped-SFAI-PNG-2-300x300.png?raw=true" alt="SFAI Logo" class="top-page-logo">
-                <p class="history-detail-text"><i class="fas fa-trophy"></i> SFAI National Cup Winners</p>
-            </div>
-        </section>
-
-        <!-- Page 17 (Copy of Page 16) -->
-        <section id="page17" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2425/League.jpg?raw=true" alt="New League Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/CherryOrchard.png?raw=true" alt="Cherry Orchard Boys Logo" class="top-page-logo">
-                <p class="history-year-text">2024 - 2025</p>
-                <p class="highlight-text">HIGHLIGHT</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/ddsl-logo.png?raw=true" alt="DDSL Logo" class="top-page-logo">
-                <p class="history-detail-text"><i class="fas fa-trophy"></i> DDSL U13 League Champions</p>
-            </div>
-        </section>
-
-        <!-- Page 18 (New page copied from Page 15) -->
-        <section id="page18" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2425/glanduff.jpg?raw=true" alt="Glanduff Team Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/FAISchools.png?raw=true" alt="FAI Schools Logo" class="top-page-logo">
-                <p class="history-year-text">2024 - 2025</p>
-                <p class="history-detail-text">Glanduff National School</p>
-                <p class="history-detail-small">(5 aside)</p>
-                <p class="history-detail-small">Awards and Recognitions</p>
-                <p class="history-detail-text">
-                    <i class="fas fa-trophy"></i> Roscommon County Champions<br>
-                    <i class="fas fa-trophy"></i> Connacht Provincial Champions<br>
-                    <i class="fas fa-trophy"></i> FAI Schools All Ireland Runners Up<br>
-                    <i class="fas fa-award"></i> Captain
-                </p>
-            </div>
-        </section>
-
-        <!-- Page 19 (New page copied from Page 17) -->
-        <section id="page19" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2425/PXL_20250508_130336084.MP.jpg?raw=true" alt="New League Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/FAISchools.png?raw=true" alt="FAI Schools Logo" class="top-page-logo">
-                <p class="history-year-text">2024 - 2025</p>
-                <p class="highlight-text">HIGHLIGHT</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/Football_Association_of_Ireland_logo.svg.png?raw=true" alt="FAI Logo" class="top-page-logo">
-                <p class="history-detail-text"><i class="fas fa-trophy"></i> Roscommon County and Connacht Provincial Champions</p>
-            </div>
-        </section>
-
-        <!-- Page 20 (Copy of Page 19) -->
-        <section id="page20" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/2425/PXL_20250611_095851776.MP~2.jpg?raw=true" alt="New League Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 History</p>
-                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/FAISchools.png?raw=true" alt="FAI Schools Logo" class="top-page-logo">
-                <p class="history-year-text">2024 - 2025</p>
-                <p class="highlight-text">HIGHLIGHT</p>
-                <p class="history-detail-text"><i class="fas fa-award"></i> In June 2025 Glanduff National School had the opportunity to play in the Aviva Stadium competing in the FAI Schools All Ireland Final. Finishing as Runners Up, this has been a tremendous achievement for this small country school.</p>
-            </div>
-        </section>
-
-        <!-- Page 21 (Copy of Page 20) -->
-        <section id="page21" class="page-section">
-            <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/michael-obafemi3.png?raw=true" alt="New League Image" class="full-page-image">
-            <div class="image-gradient-overlay"></div>
-            <div class="text-content-area">
-                <p class="page-header-text">Tadhg Doyle Player Profile 2025 Future</p>
-                <!-- New introductory text added here -->
-                <p class="content-text-block">
-                    During Tadhg's 4 years in Dublin he has benefited from excellent Football Infrastructure, Management and Top Class Coaching. These factors, combined with his own attributes, a little luck and a lot of diesel have made Tadhg the country's most decorated 2012 footballer. The journey continues....
-                </p>
-                <!-- FAI Schools Logo removed as requested -->
-                <!-- History Year text removed as requested -->
-                <p class="highlight-text">Your Role</p>
-                <p class="history-detail-text">Move Tadhg from position A to position B.<br><i class="fas fa-envelope"></i> Contact: TadhgDoyleFootball@gmail.com</p>
-            </div>
-        </section>
-
-    </div> <!-- End spa-container -->
-
-    <!-- Global Navigation Buttons -->
-    <div class="global-nav-buttons">
-        <a href="#" class="nav-arrow nav-prev" onclick="navigatePage('prev')">
-            <i class="fas fa-chevron-left"></i>
-        </a>
-        <a href="#" class="nav-arrow nav-next" onclick="navigatePage('next')">
-            <i class="fas fa-chevron-right"></i>
-        </a>
+        </div>
+        <!-- Navigation Icons are fixed positioned outside main content flow -->
+        <span class="material-icons nav-icon nav-top" id="prevSlide">expand_less</span>
+        <span class="material-icons nav-icon nav-bottom" id="nextSlide">expand_more</span>
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap JS (bundle includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
     <script>
-        const spaContainer = document.getElementById('spaContainer');
-        const sections = document.querySelectorAll('.page-section');
-        let currentPageIndex = 0; // Start at the first page (index 0)
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesWrapper = document.getElementById('slidesWrapper');
+            const slides = document.querySelectorAll('.slide');
+            const prevSlideBtn = document.getElementById('prevSlide');
+            const nextSlideBtn = document.getElementById('nextSlide');
+            const mainContent = document.querySelector('.main-content');
+            const currentSectionNameElem = document.getElementById('currentSectionName');
+            const sectionDropdownMenu = document.getElementById('sectionDropdownMenu');
+            let currentSlideIndex = 0;
+            let slideHeight = mainContent.clientHeight;
 
-        // Function to navigate to a specific page index
-        function goToPage(index) {
-            if (index >= 0 && index < sections.length) {
-                currentPageIndex = index;
-                spaContainer.style.transform = `translateX(-${currentPageIndex * 100}vw)`;
+            // Define all slide data, including hierarchy
+            const slideTitles = [
+                { name: "Introduction", display: "Introduction", isHeader: false, parentName: null },
+                { name: "Background", display: "Background", isHeader: false, parentName: null },
+                { name: "Overview + Attributes (Header)", display: "Overview + Attributes", isHeader: true, parentName: null },
+                { name: "Overview", display: "Overview", isHeader: false, parentName: "Overview + Attributes (Header)" },
+                { name: "Attributes", display: "Attributes", isHeader: false, parentName: "Overview + Attributes (Header)" },
+                { name: "History (Header)", display: "History", isHeader: true, parentName: null }, // Corrected display value
+                { name: "Season 2021 - 2022", display: "Season 2021 - 2022", isHeader: false, parentName: "History (Header)" },
+                { name: "Season Highlights (2021-2022)", display: "Season Highlights", isHeader: false, parentName: "Season 2021 - 2022" }, // Unique name for 2021-2022 highlights
+                { name: "Season 2022 - 2023", display: "Season 2022 - 2023", isHeader: false, parentName: "History (Header)" },
+                { name: "Season Highlights (2022-2023)", display: "Season Highlights", isHeader: false, parentName: "Season 2022 - 2023" }, // NEW SUB-SUBHEADING, unique name
+                { name: "Season 2023 - 2040", display: "Season 2023 - 2040", isHeader: false, parentName: "History (Header)" },
+                { name: "Season 2040 - 2050", display: "Season 2040 - 2050", isHeader: false, parentName: "History (Header)" },
+                { name: "In Summary", display: "In Summary", isHeader: false, parentName: null },
+                { name: "The Future", display: "The Future", isHeader: false, parentName: null },
+                { name: "Contact Details", display: "Contact Details", isHeader: false, parentName: null }
+            ];
 
-                // Update visibility of navigation arrows
-                const navPrev = document.querySelector('.nav-prev');
-                const navNext = document.querySelector('.nav-next');
+            // Helper function to find a slide item by its unique name
+            const findSlideItemByName = (name) => slideTitles.find(item => item.name === name);
 
-                if (navPrev) {
-                    if (currentPageIndex === 0) {
-                        navPrev.classList.add('hidden');
+            // Function to populate dropdown menu items dynamically
+            function populateDropdownMenu() {
+                sectionDropdownMenu.innerHTML = '';
+                slideTitles.forEach((item, index) => {
+                    const li = document.createElement('li');
+                    const el = item.isHeader ? document.createElement('span') : document.createElement('a');
+
+                    el.href = "#";
+                    el.dataset.slideIndex = index;
+                    el.textContent = item.display;
+
+                    if (item.isHeader) {
+                        el.classList.add('menu-descriptive-header');
                     } else {
-                        navPrev.classList.remove('hidden');
+                        el.classList.add('dropdown-item');
+
+                        let currentParent = findSlideItemByName(item.parentName);
+                        let depth = 0;
+                        while (currentParent) {
+                            depth++;
+                            currentParent = findSlideItemByName(currentParent.parentName);
+                        }
+
+                        if (depth === 1) {
+                            el.classList.add('subheading');
+                        } else if (depth === 2) {
+                            el.classList.add('subheading');
+                            el.classList.add('sub-subheading');
+                        }
+
+                        el.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            currentSlideIndex = parseInt(this.dataset.slideIndex);
+                            updateSlide();
+                        });
                     }
-                }
-                if (navNext) {
-                    if (currentPageIndex === sections.length - 1) {
-                        navNext.classList.add('hidden');
+                    li.appendChild(el);
+                    sectionDropdownMenu.appendChild(li);
+                });
+            }
+
+            // Function to update slide height on resize
+            function updateSlideHeight() {
+                slideHeight = mainContent.clientHeight;
+                slidesWrapper.style.transform = `translateY(${-currentSlideIndex * slideHeight}px)`;
+            }
+            window.addEventListener('resize', updateSlideHeight);
+
+            // Function to update the displayed slide and the dynamic section header
+            function updateSlide() {
+                slidesWrapper.style.transform = `translateY(${-currentSlideIndex * slideHeight}px)`;
+                let currentItem = slideTitles[currentSlideIndex];
+                let pathParts = [currentItem.display];
+
+                let tempParentName = currentItem.parentName;
+                while (tempParentName) {
+                    const parentItem = findSlideItemByName(tempParentName);
+                    if (parentItem) {
+                        pathParts.unshift(parentItem.display);
+                        tempParentName = parentItem.parentName;
                     } else {
-                        navNext.classList.remove('hidden');
-                    }
-                    }
-                }
-            // Update the URL hash to reflect the current page
-            window.location.hash = `#page${currentPageIndex + 1}`;
-        }
-
-        // --- Event Listeners for Navigation ---
-
-        // Autoscroll for Page 1 (index 0) only
-        window.onload = function() {
-            // Check if there's a hash in the URL, and navigate to that page
-            if (window.location.hash) {
-                const pageId = window.location.hash.substring(1); // Remove '#'
-                const pageElement = document.getElementById(pageId);
-                if (pageElement) {
-                    const index = Array.from(sections).indexOf(pageElement);
-                    if (index !== -1) {
-                        goToPage(index);
+                        break;
                     }
                 }
+
+                currentSectionNameElem.textContent = pathParts.join(' \u2022 ');
             }
-            // Initial positioning and arrow visibility (important for SPA context)
-            goToPage(currentPageIndex);
-        };
 
-        // Swipe detection for phone navigation on the main container
-        let touchstartX = 0;
-        let touchendX = 0;
-        const minSwipeDistance = 50; // Minimum distance in pixels for a swipe
+            // Navigation functions
+            function nextSlide() {
+                currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                while (slideTitles[currentSlideIndex].isHeader && currentSlideIndex !== slides.length - 1) {
+                    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                }
+                if (slideTitles[currentSlideIndex].isHeader && slides.length > 1) {
+                    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                }
+                updateSlide();
+            }
 
-        spaContainer.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
+            // Navigation functions
+            function prevSlide() {
+                currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+                while (currentSlideIndex >= 0 && slideTitles[currentSlideIndex].isHeader) {
+                    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+                }
+                if (slideTitles[currentSlideIndex].isHeader && slides.length > 1) {
+                    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+                }
+                updateSlide();
+            }
+
+            // Event listeners
+            nextSlideBtn.addEventListener('click', nextSlide);
+            prevSlideBtn.addEventListener('click', prevSlide);
+
+            let startY;
+            mainContent.addEventListener('touchstart', (e) => {
+                startY = e.touches[0].clientY;
+            });
+
+            mainContent.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            }, { passive: false });
+
+            mainContent.addEventListener('touchend', (e) => {
+                const endY = e.changedTouches[0].clientY;
+                const deltaY = endY - startY;
+
+                if (deltaY > 50) {
+                    prevSlide();
+                } else if (deltaY < -50) {
+                    nextSlide();
+                }
+            });
+
+            // Initial calls
+            populateDropdownMenu();
+            updateSlideHeight();
+            updateSlide();
         });
-
-        spaContainer.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            handleGesture();
-        });
-
-        function handleGesture() {
-            if (touchendX < touchstartX - minSwipeDistance) {
-                // Swiped left (go to next page)
-                navigatePage('next');
-            } else if (touchendX > touchstartX + minSwipeDistance) {
-                // Swiped right (go to previous page)
-                navigatePage('prev');
-            }
-        }
-
-        // Unified navigation function for buttons and swipes
-        function navigatePage(direction) {
-            if (direction === 'next') {
-                if (currentPageIndex < sections.length - 1) {
-                    goToPage(currentPageIndex + 1);
-                }
-            } else if (direction === 'prev') {
-                if (currentPageIndex > 0) {
-                    goToPage(currentPageIndex - 1);
-                }
-            } else if (typeof direction === 'number') { // For direct button clicks by page index
-                goToPage(direction);
-            }
-        }
-
-        // The previous handleCombinedButtonClick function is no longer needed as the buttons are replaced.
-
     </script>
 </body>
 </html>
