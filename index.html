@@ -16,10 +16,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /* Custom CSS */
+        html, body { /* Ensure html and body take full height */
+            height: 100%;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
-            overflow-y: hidden; /* Changed: Prevent body scroll */
+            overflow-y: auto; /* Changed: Apply scrollbar to the whole page */
             overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
@@ -577,6 +581,10 @@
                             <p class="centered-paragraph-text">7aside + 9aside</p>
                             <p class="centered-paragraph-text awards-recognitions-heading" style="margin-top: 1rem;">Awards and Recognitions</p>
                             <p class="centered-paragraph-text awards-item-lines-solid-white"><i class="fas fa-trophy"></i> Belfast Youth Cup (Trophy Section) Winners<br><i class="fas fa-trophy"></i> Kells Blackwater Cup Winners<br><i class="fas fa-award"></i> Award</p>
+                            <div class="logos-container">
+                                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/Craigavon%20Cup%20logo2.png?raw=true" alt="Craigavon Cup Logo" class="logo-half-kevins">
+                                <img src="https://github.com/TadhgDoyle/TadhgDoyleFootball/blob/main/ddsl-logo.png?raw=true" alt="DDSL Logo" class="logo-half-kevins">
+                            </div>
                         </div>
                         <div class="top-overlay-div"></div>
                     </div>
